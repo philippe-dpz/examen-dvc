@@ -1,0 +1,82 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/data/preprocessing.py
+    deps:
+    - path: data/raw/raw.csv
+      hash: md5
+      md5: 617b56af2992376d5c3e91ad80823898
+      size: 333757
+    - path: src/data/preprocessing.py
+      hash: md5
+      md5: b268823790af5c7dc6e53f8880ddff5c
+      size: 727
+    outs:
+    - path: data/processed
+      hash: md5
+      md5: 98c1f08a2d07a6439970a35ac967be92.dir
+      size: 294499
+      nfiles: 4
+  normalize:
+    cmd: python src/data/normalize.py
+    deps:
+    - path: data/processed
+      hash: md5
+      md5: 98c1f08a2d07a6439970a35ac967be92.dir
+      size: 294499
+      nfiles: 4
+    - path: src/data/normalize.py
+      hash: md5
+      md5: fce498378048e50ef89a4919ee8b5beb
+      size: 1137
+    outs:
+    - path: data/processed_scaled
+      hash: md5
+      md5: 8722aa5c515eba7c6fa28f390621b13d.dir
+      size: 284523
+      nfiles: 2
+  gridsearch:
+    cmd: python src/models/gridsearch.py
+    deps:
+    - path: data/processed_scaled
+      hash: md5
+      md5: 8722aa5c515eba7c6fa28f390621b13d.dir
+      size: 284523
+      nfiles: 2
+    - path: src/models/gridsearch.py
+      hash: md5
+      md5: 2fb3e2abaca889ffae137e5633a1d0cb
+      size: 1132
+  train:
+    cmd: python src/models/train_model.py
+    deps:
+    - path: data/processed_scaled
+      hash: md5
+      md5: 8722aa5c515eba7c6fa28f390621b13d.dir
+      size: 284523
+      nfiles: 2
+    - path: src/models/train_model.py
+      hash: md5
+      md5: d49a6713018b48ea029c981f8b966630
+      size: 1704
+  evaluate:
+    cmd: python src/models/evaluate_model.py
+    deps:
+    - path: data/processed_scaled
+      hash: md5
+      md5: 8722aa5c515eba7c6fa28f390621b13d.dir
+      size: 284523
+      nfiles: 2
+    - path: src/models/evaluate_model.py
+      hash: md5
+      md5: 96a34dffb908083f4019afee2595e2cf
+      size: 1235
+    outs:
+    - path: data/predictions.csv
+      hash: md5
+      md5: 7a212ef60eef35476bb6f4615640705b
+      size: 13229
+    - path: metrics/accuracy.json
+      hash: md5
+      md5: f8abbc583d183063cf0015602eb99134
+      size: 96
