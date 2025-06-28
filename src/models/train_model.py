@@ -6,7 +6,7 @@ from sklearn.ensemble import RandomForestRegressor
 
 def main():
     # Charger les données
-    X_train = pd.read_csv("data/processed/X_train_scaled.csv")
+    X_train = pd.read_csv("data/processed_scaled/X_train_scaled.csv")
     y_train = pd.read_csv("data/processed/y_train.csv").values.ravel()
 
     # Charger les meilleurs paramètres
@@ -34,7 +34,7 @@ from sklearn.ensemble import RandomForestRegressor
 
 def main():
     # Charger les données
-    X_train = pd.read_csv("data/processed/X_train_scaled.csv")
+    X_train = pd.read_csv("data/processed_scaled/X_train_scaled.csv")
     y_train = pd.read_csv("data/processed/y_train.csv").values.ravel()
 
     # Charger les meilleurs paramètres

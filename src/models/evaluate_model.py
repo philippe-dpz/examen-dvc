@@ -6,7 +6,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 def main():
     # Charger les données de test
-    X_test = pd.read_csv("data/processed/X_test_scaled.csv")
+    X_test = pd.read_csv("data/processed_scaled/X_test_scaled.csv")
     y_test = pd.read_csv("data/processed/y_test.csv").values.ravel()
 
     # Charger le modèle entraîné
